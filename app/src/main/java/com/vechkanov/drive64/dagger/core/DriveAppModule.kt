@@ -1,6 +1,7 @@
 package com.vechkanov.drive64.dagger.core
 
 import android.content.Context
+import com.google.gson.Gson
 import com.vechkanov.drive64.DriveMainApplication
 import com.vechkanov.drive64.ui.main.MainActivityViewModel
 import dagger.Module
@@ -13,6 +14,12 @@ class DriveAppModule {
     @Provides
     internal fun provideContext(application: DriveMainApplication): Context {
         return application
+    }
+
+    @Singleton
+    @Provides
+    internal fun providesGson(): Gson {
+        return Gson()
     }
 
 //    @Singleton
