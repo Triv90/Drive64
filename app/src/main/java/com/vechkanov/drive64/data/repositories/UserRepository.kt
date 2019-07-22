@@ -16,15 +16,21 @@ constructor(
     // Return user Id or nothing
     fun saveUser(user: User, saveAsCurrent: Boolean): Maybe<Long> {
         val insertedId = appDatabase.userDao().insert(user)
-        sharedPrefProvider.saveToSharedPref(CURRENT_USER_PREF_KEY, insertedId)
+        if (saveAsCurrent) {
+            sharedPrefProvider.saveToSharedPref(CURRENT_USER_PREF_KEY, insertedId)
+        }
         return Maybe.just(insertedId)
     }
 
     fun getUser(userId: Long): Maybe<User> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return Maybe.just(appDatabase.userDao().get(userId))
     }
 
-    fun currentUser(userId: Long): Maybe<User> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    fun currentUser(): Maybe<User> {
+        val currentUserId = sharedPrefProvider.getSharedPref(CURRENT_USER_PREF_KEY, 0)
+        if (currentUserId != 0L) {
+            return Maybe.just(appDatabase.userDao().get(currentUserId))
+        }
+        return Maybe.empty()
     }
 }

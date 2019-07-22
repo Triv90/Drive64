@@ -2,6 +2,7 @@ package com.vechkanov.drive64.data.local.room
 
 import androidx.room.*
 import com.vechkanov.drive64.data.model.User
+import java.util.*
 
 @Dao
 interface UserDao {

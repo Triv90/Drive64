@@ -6,6 +6,12 @@ apply plugin: 'kotlin-kapt'
 
 apply plugin: 'kotlin-android-extensions'
 
+repositories {
+    maven {
+        url "http://maven.google.com/"
+    }
+}
+
 android {
     compileSdkVersion 28
     defaultConfig {
@@ -57,7 +63,8 @@ dependencies {
 
     //Timber log
     implementation 'com.jakewharton.timber:timber:4.7.1'
-
+    // Основная библиотека MapKit.
+    compile 'com.yandex.android:mapkit:3.3.1'
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.3.0-alpha02'

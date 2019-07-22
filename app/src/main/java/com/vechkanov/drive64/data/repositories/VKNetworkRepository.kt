@@ -7,7 +7,7 @@ import com.vk.sdk.api.VKError
 import com.vk.sdk.api.VKRequest
 import com.vk.sdk.api.VKResponse
 import io.reactivex.Maybe
-import java.lang.NullPointerException
+import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 class VKNetworkRepository
@@ -17,13 +17,11 @@ class VKNetworkRepository
     fun retrieveCurrentUser(): Maybe<UserVK> {
         val request = VKApi.users().get()
         return Maybe.create<VKResponse> { maybe ->
-            request.executeWithListener(object : VKRequest.VKRequestListener() {
+            request.executeSyncWithListener(object : VKRequest.VKRequestListener() {
                 override fun onComplete(response: VKResponse?) {
+
                     if (response != null) {
                         maybe.onSuccess(response)
-                        maybe.onComplete()
-
-
                     } else {
                         maybe.onError(NullPointerException("VK returns null response."))
                     }
@@ -33,8 +31,10 @@ class VKNetworkRepository
                     maybe.onComplete()
                 }
             })
-        }.map { response ->
-            gson.fromJson(response.json.toString(), UserVK::class.java)
         }
+                .observeOn(Schedulers.io())
+                .map { response ->
+                    gson.fromJson(response.json.getJSONArray("response")[0].toString(), UserVK::class.java)
+                }
     }
 }

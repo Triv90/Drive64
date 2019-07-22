@@ -15,6 +15,7 @@ import com.vk.sdk.VKCallback
 import android.content.Intent
 import android.widget.Toast
 import com.vechkanov.drive64.R
+import com.vechkanov.drive64.ui.main.MainActivity
 import timber.log.Timber
 
 
@@ -45,6 +46,10 @@ class LoginActivity : BaseActivity<LoginViewModel>(), View.OnClickListener {
                 Toast.makeText(this, "User successfully authorised in VK", Toast.LENGTH_SHORT).show()
             }
             VKEvent.SHOW_LOGIN -> VKSdk.login(this)
+            VKEvent.OPEN_MAIN_ACTIVITY -> {
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+            }
         }
     }
 
