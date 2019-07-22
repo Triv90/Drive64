@@ -11,7 +11,7 @@ import javax.inject.Inject
 class VKUserManager @Inject
 constructor(private val userRepository: UserRepository,
             private val vkNetworkRepository: VKNetworkRepository) {
-    fun saveVkUserAsCurrent(userVk: UserVK): Maybe<Int> {
+    fun saveVkUserAsCurrent(userVk: UserVK): Maybe<Long> {
         return userRepository.saveUser(userVk.parse(), true)
     }
 

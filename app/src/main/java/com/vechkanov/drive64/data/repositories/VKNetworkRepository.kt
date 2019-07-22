@@ -2,7 +2,6 @@ package com.vechkanov.drive64.data.repositories
 
 import com.google.gson.Gson
 import com.vechkanov.drive64.data.dtoModels.UserVK
-import com.vechkanov.drive64.ui.login.VKEvent
 import com.vk.sdk.api.VKApi
 import com.vk.sdk.api.VKError
 import com.vk.sdk.api.VKRequest

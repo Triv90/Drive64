@@ -1,14 +1,8 @@
 package com.vechkanov.drive64.ui.login
 
-import com.google.gson.Gson
-import com.vechkanov.drive64.data.dtoModels.UserVK
 import com.vechkanov.drive64.data.managers.VKUserManager
 import com.vechkanov.drive64.ui.core.BaseViewModel
 import com.vechkanov.drive64.utils.SingleLiveEvent
-import com.vk.sdk.api.VKApi
-import com.vk.sdk.api.VKError
-import com.vk.sdk.api.VKRequest.VKRequestListener
-import com.vk.sdk.api.VKResponse
 import io.reactivex.rxkotlin.subscribeBy
 import javax.inject.Inject
 
